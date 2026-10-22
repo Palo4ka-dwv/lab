@@ -1,0 +1,73 @@
+class Programm
+{
+    static void Main(string[] args)
+    {
+        OldLaggerAdapter adapter = new OldLaggerAdapter();
+        OldLogger oldLogger = new OldLogger();
+        adapter.Info("Inf");
+        adapter.Warning("War");
+        adapter.Error("Err");
+    }
+}
+
+interface Ilogger
+{
+    void Info(string message);
+    void Warning(string message);
+    void Error(string message);
+}
+class OldLogger
+{
+    const int Info = 1;
+    const int Warning = 2;
+    const int Error = 3;
+    public void WriteLog(string Text, int Lvl)
+    {
+        switch(Lvl)
+        {
+            case Info:
+                {
+                    Text = "Information";
+                    Console.WriteLine(Text);
+                    break;
+                }
+            case Warning:
+                {
+                    Text = "Warning";
+                    Console.WriteLine(Text);
+                    break;
+                }
+            case Error:
+                {
+                    Text = "Error";
+                    Console.WriteLine(Text);
+                    break;
+                }
+        }
+
+    }
+
+
+}
+
+class OldLaggerAdapter : Ilogger
+{
+    OldLogger oldLogger = new OldLogger();
+    int lvl;
+    public void Info(string message)
+    {
+        lvl = 1;
+        oldLogger.WriteLog("message", lvl);
+    }
+    public void Warning(string message)
+    {
+        lvl = 2;
+        oldLogger.WriteLog("message", lvl);
+    }
+
+    public void Error(string message)
+    {
+        lvl = 3;
+        oldLogger.WriteLog("message", lvl);
+    }
+}
